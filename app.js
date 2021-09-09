@@ -1,6 +1,8 @@
 /**
  * Module dependencies.
  */
+const scout = require("@scout_apm/scout-apm");
+
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
@@ -19,6 +21,9 @@ app.use(function(err, req, res, next) {
 	console.log(err.stack);
 	res.json({error: true});
 });
+
+//Enable the app-wide scout middleware
+app.use(scout.expressMiddleware());
 
 app.get('/', routes.index);
 
